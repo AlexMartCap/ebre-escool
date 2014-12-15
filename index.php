@@ -56,7 +56,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = '/usr/share/codeigniter/system';
+	$system_path = '/usr/share/CodeIgniter_2.2.0/system';
 
 /*
  *---------------------------------------------------------------
