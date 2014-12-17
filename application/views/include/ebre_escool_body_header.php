@@ -1250,6 +1250,13 @@
                 </a>
               </li>
 
+              <li id="managment_users_google_apps">
+                <a href="<?php echo base_url('index.php/managment/users_google_apps');?>">
+                  <i class="icon-double-angle-right"></i>
+                  <?php echo lang('users_google_apps'); ?>
+                </a>
+              </li>
+
               <li id="managment_users_ldap">
                 <a href="<?php echo base_url('index.php/managment/users_ldap');?>">
                   <i class="icon-double-angle-right"></i>
