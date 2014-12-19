@@ -17,7 +17,7 @@
 
 <div class="page-header position-relative">
                 <h1>
-                    Usuaris Google Apps
+                    Persones
                     <small>
                         <i class="icon-double-angle-right"></i>
                         consulta i operacions
@@ -30,23 +30,9 @@
    		
       <script>
 
-      var all_google_apps_users_table;
+      var all_persons_table;
 
       $(function(){
-
-              
-              $("#select_class_list_academic_period_filter").select2();
-
-              $("#academic_period_text").text( $("#select_class_list_academic_period_filter").select2("data").text);
-
-              $('#select_class_list_academic_period_filter').on("change", function(e) {  
-                  var selectedValue = $("#select_class_list_academic_period_filter").select2("val");
-                  var pathArray = window.location.pathname.split( '/' );
-                  var secondLevelLocation = pathArray[1];
-                  var baseURL = window.location.protocol + "//" + window.location.host + "/" + secondLevelLocation + "/index.php/managment/users_ldap";
-                  //alert(baseURL + "/" + selectedValue);
-                  window.location.href = baseURL + "/" + selectedValue;
-              });
 
               //Jquery select plugin: http://ivaynberg.github.io/select2/
               $("#select_user_ldaps_academic_period_filter").select2();
@@ -61,129 +47,100 @@
 
               });
 
-              var selectedAP = $("#select_class_list_academic_period_filter").select2("val");
-
-              var all_google_apps_users_table = $('#all_google_apps_users').DataTable( {
+              var all_persons_table = $('#all_persons').DataTable( {
                       "bDestroy": true,
-                      "sAjaxSource": "<?php echo base_url('index.php/managment/get_users_google_apps/');?>/" + selectedAP,
+                      "sAjaxSource": "<?php echo base_url('index.php/managment/get_persons/');?>",
                       "fnInitComplete": function () {
                           $("#spinner").hide();   // Hide the spinner
                       },
                       "aoColumns": [
                         { "mData": function(data, type, full) {
-                                    return '<label><input class="ace" type="checkbox" name="google-apps-user-checkbox" id="' + data.Id + '"><span class="lbl">&nbsp;</span></label>';
-                                  }},   
+                          return '<label><input class="ace" type="checkbox" name="google-apps-user-checkbox" id="' + data.person_id + '"><span class="lbl">&nbsp;</span></label>';
+                        }},   
                         { "mData": function(data, type, full) {
-                          if (data.thumbnailPhotoUrl != null) {
-                            return '<a class="image-thumbnail" href="' + data.thumbnailPhotoUrl + '"><img data-rel="tooltip" class="msg-photo" alt="'+ data.fullName +'" title="'+ data.fullName +'" src="' + data.thumbnailPhotoUrl + '" alt="foto usuari Google Apps" style="width:75px;"></img></a>';                            
+                          if (data.person_photo != null) {
+                            base_url = "<?php echo base_url('uploads/person_photos');?>";
+                            fullname = data.person_givenName + " " + data.person_sn1 + "" + data.person_sn2;
+                            return '<a class="image-thumbnail" href="' + base_url + "/" + data.person_photo + '"><img data-rel="tooltip" class="msg-photo" alt="'+ data.fullName +'" title="'+ fullname +'" src="' + base_url + "/" + data.person_photo + '" alt="foto" style="width:75px;"></img></a>';                            
                           } else {
                             return 'Sense foto';
                           }
                         }},
                         { "mData": function(data, type, full) {
-                            return data.primaryEmail;            
+                            return data.person_id;            
                         }},  
                         { "mData": function(data, type, full) {
-                            return data.givenName;            
+                            return data.person_givenName;            
                         }},    
                         { "mData": function(data, type, full) {
-                            return data.familyName;                
+                            return data.person_sn1;                
                         }},
                         { "mData": function(data, type, full) {
-                            return data.fullName;                
-                        },"bVisible": false},    
+                            return data.person_sn2;                
+                        }},
                         { "mData": function(data, type, full) {
-                            return data.id;            
+                            return data.person_email;                
+                        }},    
+                        { "mData": function(data, type, full) {
+                            return data.person_secondary_email;            
                         },"bVisible": false},
                         { "mData": function(data, type, full) {
-                            return data.etag;            
+                            return data.person_terciary_email;            
                         },"bVisible": false},    
                         { "mData": function(data, type, full) {
-                            return data.kind;            
-                        },"bVisible": false},    
+                            return data.person_official_id;            
+                        }},    
                         { "mData": function(data, type, full) {
-                            return data.isAdmin;            
-                        }}, 
-                        { "mData": function(data, type, full) {
-                            return data.isDelegatedAdmin;            
+                            return data.person_official_id_type;            
                         },"bVisible": false}, 
                         { "mData": function(data, type, full) {
-                            return data.lastLoginTime;            
+                            return data.person_date_of_birth;            
+                        },"bVisible": false}, 
+                        { "mData": function(data, type, full) {
+                            return data.person_gender;            
                         }}, 
                         { "mData": function(data, type, full) {
-                            return data.creationTime;            
-                        }}, 
+                            return data.person_secondary_official_id;            
+                        },"bVisible": false}, 
                         { "mData": function(data, type, full) {
-                            return data.deletionTime;            
+                            return data.person_secondary_official_id_type;            
                         },"bVisible": false},
                         { "mData": function(data, type, full) {
-                            return data.agreedToTerms;            
+                            return data.person_homePostalAddress;            
                         }},  
                         { "mData": function(data, type, full) {
-                            return data.aliases;            
+                            return data.person_locality_id;            
                         }},  
                         { "mData": function(data, type, full) {
-                            return data.hashFunction;            
+                            return data.person_telephoneNumber;            
                         },"bVisible": false},  
                         { "mData": function(data, type, full) {
-                            return data.password;            
+                            return data.person_mobile;            
                         },"bVisible": false},  
                         { "mData": function(data, type, full) {
-                          if (data.suspended) {
-                            return "Suspès";            
-                          } else {
-                            return "Actiu";            
-                          }
-                            
-                        }},  
+                            return data.person_bank_account_id;
+                        },"bVisible": false},  
                         { "mData": function(data, type, full) {
-                            return data.suspensionReason;            
+                            return data.person_notes;            
                         }}, 
                         { "mData": function(data, type, full) {
-                            return data.changePasswordAtNextLogin;            
+                            return data.person_entryDate;            
                         }}, 
                         { "mData": function(data, type, full) {
-                            if (data.addresses !=null) {
-                              return data.addresses;
-                            } else {
-                              return "Sense adreces";
-                            }
+                              return data.person_last_update;
                         },"bVisible": false},  
                         { "mData": function(data, type, full) {
-                            return data.ipWhitelisted;            
+                            return data.person_creationUserId;            
                         },"bVisible": false},  
                         { "mData": function(data, type, full) {
-                            return data.customerId;            
+                            return data.person_lastupdateUserId;            
                         },"bVisible": false}, 
                         { "mData": function(data, type, full) {
-                            return data.orgUnitPath;            
+                            return data.person_markedForDeletion;            
                         }},   
                         { "mData": function(data, type, full) {
-                            return data.isMailboxSetup;            
+                            return data.person_markedForDeletionDate;            
                         }},   
-                        { "mData": function(data, type, full) {
-                            return data.includeInGlobalAddressList;            
-                        }},   
-                        { "mData": function(data, type, full) {
-                          strEmails="";
-                          $.each(data.emails, function( index, value ) {
-                              primary = "";
-                              if (value.primary) {
-                                primary = "primari";
-                              }
-                              strEmails = strEmails + value.address + " ( tipus: " + value.type + " " + primary + "), ";
-                          });       
-                          return strEmails;  
-                        },"bVisible": false},   
-                        { "mData": function(data, type, full) {
-                          strExternalIds="";
-                          if (data.externalIds != null) {
-                            $.each(data.externalIds, function( index, value ) {
-                                strExternalIds = strExternalIds + value.value + " ( tipus: " + value.type + "), ";
-                            });         
-                          }
-                          return strExternalIds;  
-                        }},  
                       ],
                       "columnDefs": [
                                       { "type": "html", "targets": 3 }
@@ -211,7 +168,7 @@
                                       {
                                               "sExtends": "pdf",
                                               "sPdfOrientation": "landscape",
-                                              "sPdfMessage": "<?php echo lang("all_google_apps_users");?>",
+                                              "sPdfMessage": "<?php echo lang("all_persons");?>",
                                               "sTitle": "TODO",
                                               "sButtonText": "PDF"
                                       },
@@ -219,7 +176,7 @@
                                               "sExtends": "print",
                                               "sButtonText": "<?php echo lang("Print");?>",
                                               "sToolTip": "Vista impressió",
-                                              "sMessage": "<center><h2>Usuaris Google Apps</h2></center>",
+                                              "sMessage": "<center><h2>Persones</h2></center>",
                                               "sInfo": "<h6>Vista impressió</h6><p>Si us plau utilitzeu l'opció d'imprimir del vostre navegador (Ctrl+P) per "+
                                                        "imprimir. Feu clic a la tecla Esc per tornar.",
                                       },
@@ -267,11 +224,11 @@
      
     
 
-        //$("#select_all_google_apps_users_main_organizational_unit_filter").select2({ width: 'resolve', placeholder: "Seleccioneu una unitat organitzativa", allowClear: true });
+        //$("#select_all_persons_main_organizational_unit_filter").select2({ width: 'resolve', placeholder: "Seleccioneu una unitat organitzativa", allowClear: true });
         /*
-        $("#select_all_google_apps_users_main_organizational_unit_filter").on( 'change', function () {
+        $("#select_all_persons_main_organizational_unit_filter").on( 'change', function () {
             var val = $(this).val();
-            all_google_apps_users_table.column(5).search( val , false, true ).draw();
+            all_persons_table.column(5).search( val , false, true ).draw();
         } );*/
 
 });
@@ -279,44 +236,20 @@
 
 <div class="container">
 
-<table style="display: none;" class="table table-striped table-bordered table-hover table-condensed" id="all_google_apps_users_filter">
+<table style="display: none;" class="table table-striped table-bordered table-hover table-condensed" id="all_persons_filter">
   <thead style="background-color: #d9edf7;">
     <tr>
       <td colspan="6" style="text-align: center;"> <strong>Filtres per columnes
         </strong></td>
     </tr>
-    <tr>
-      <td style="text-align: center;"> <strong>Període acadèmic:
-        </strong>
-      </td>
-      <td colspan="4" style="text-align: center;"> 
-              <select id="select_class_list_academic_period_filter">
-                <?php foreach ($academic_periods as $academic_period_key => $academic_period_value) : ?>
-                  <?php if ( $selected_academic_period_id) : ?>
-                    <?php if ( $academic_period_key == $selected_academic_period_id) : ?>
-                      <option selected="selected" value="<?php echo $academic_period_key ;?>"><?php echo $academic_period_value->shortname ;?></option>
-                    <?php else: ?>
-                        <option value="<?php echo $academic_period_key ;?>"><?php echo $academic_period_value->shortname ;?></option>
-                    <?php endif; ?>
-                  <?php else: ?>   
-                      <?php if ( $academic_period_value->current == 1) : ?>
-                        <option selected="selected" value="<?php echo $academic_period_key ;?>"><?php echo $academic_period_value->shortname ;?></option>
-                      <?php else: ?>
-                        <option value="<?php echo $academic_period_key ;?>"><?php echo $academic_period_value->shortname ;?></option>
-                      <?php endif; ?> 
-                  <?php endif; ?> 
-                <?php endforeach; ?>
-                </select>    
-      </td>
-    </tr>
     <tr> 
        <td><?php echo "Unitat organitzativa"?>:</td>
        <td>
-        TODO<select id="select_all_google_apps_users_main_organizational_unit_filter"><option value=""></option></select>
+        TODO<select id="select_all_persons_main_organizational_unit_filter"><option value=""></option></select>
        </td>
        <td><?php echo "Tipus usuari"?>:</td>
        <td colspan="2">
-        TODO<select id="select_all_google_apps_users_user_type_filter"><option value=""></option><option value="1">1</option><option value="2">2</option></select>
+        TODO<select id="select_all_persons_user_type_filter"><option value=""></option><option value="1">1</option><option value="2">2</option></select>
       </td>
     </tr>
   </thead>  
@@ -393,38 +326,36 @@
 
 <center><i id="spinner" class="icon-spinner icon-spin orange bigger-300"></i></center>
 
-<table class="table table-striped table-bordered table-hover table-condensed" id="all_google_apps_users">
+<table class="table table-striped table-bordered table-hover table-condensed" id="all_persons">
  <thead style="background-color: #d9edf7;">
   <tr>
      <th>&nbsp;</th> 
-     <th>Photo</th>
-     <th>primaryEmail</th>
-     <th>givenName</th>
-     <th>familyName</th>
-     <th>fullName</th>
-     <th>Id</th>
-     <th>Etag</th>
-     <th>Kind</th>
-     <th>isAdmin</th>
-     <th>isDelegatedAdmin</th>
-     <th>lastLoginTime</th>
-     <th>creationTime</th>
-     <th>deletionTime</th>
-     <th>agreedToTerms</th>
-     <th>aliases</th>
-     <th>hashFunction</th>
-     <th>password</th>
-     <th>suspended</th>
-     <th>suspensionReason</th>
-     <th>changePasswordAtNextLogin</th>
-     <th>Addresses</th>
-     <th>ipWhitelisted</th>
-     <th>customerId</th>
-     <th>orgUnitPath</th>
-     <th>isMailboxSetup</th>
-     <th>includeInGlobalAddressList</th>
-     <th>emails</th>
-     <th>externalIds</th>
+     <th title="person_photo">Foto</th>
+     <th title="person_id">Id</th>
+     <th title="person_givenName">Nom</th>
+     <th title="person_sn1">Cognom 1</th>
+     <th title="person_sn2">Cognom 2</th>
+     <th title="person_email">Correu electrònic</th>
+     <th title="person_secondary_email">Email secundari</th>
+     <th title="person_terciary_email">Email terciari</th>
+     <th title="person_official_id">DNI/NIEPassaport</th>
+     <th title="person_official_id_type">Tipus Id</th>
+     <th title="person_date_of_birth">Data naixement</th>
+     <th title="person_gender">Sexe</th>
+     <th title="person_secondary_official_id">Id secundari</th>
+     <th title="person_secondary_official_id_type">Tipus Id secundari</th>
+     <th title="person_homePostalAddress">Adreça postal</th>     
+     <th title="person_locality_id">Localitat</th>
+     <th title="person_telephoneNumber">Telèfon</th>
+     <th title="person_mobile">Mòbil</th>
+     <th title="person_bank_account_id">Compte bancari</th>
+     <th title="person_notes">Notes</th>
+     <th title="person_entryDate">Data entrada</th>
+     <th title="person_last_update">Data última modificació</th>
+     <th title="person_creationUserId">Usuari creació</th>
+     <th title="person_lastupdateUserId">Usuari última modificació</th>
+     <th title="person_markedForDeletion">Baixa?</th>
+     <th title="person_markedForDeletionDate">Data de baixa</th>
   </tr>
  </thead>
  

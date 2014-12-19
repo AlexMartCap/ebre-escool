@@ -1243,10 +1243,24 @@
                 </a>
               </li>-->
 
+              <li id="managment_persons">
+                <a href="<?php echo base_url('index.php/managment/persons');?>">
+                  <i class="icon-double-angle-right"></i>
+                  <?php echo lang('persons'); ?>
+                </a>
+              </li>
+
+              <li id="managment_users_not_gc">
+                <a href="<?php echo base_url('index.php/managment/users');?>">
+                  <i class="icon-double-angle-right"></i>
+                  <?php echo lang('users'); ?>
+                </a>
+              </li>
+
               <li id="managment_users">
                 <a href="<?php echo base_url('index.php/users');?>">
                   <i class="icon-double-angle-right"></i>
-                  <?php echo lang('users'); ?>
+                  <?php echo lang('users'); ?> GC
                 </a>
               </li>
 

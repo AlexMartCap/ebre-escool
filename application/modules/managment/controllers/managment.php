@@ -16,7 +16,7 @@ class managment extends skeleton_main {
     {
         parent::__construct();
         
-        //CAHNGE: Sergi Tur. Move all function form attendance model to managment model
+        //CHANGE: Sergi Tur. Move all function form attendance model to managment model
         //$this->load->model('attendance_model');
         $this->load->model('managment_model');
         $this->load->library('ebre_escool_ldap');
@@ -982,6 +982,34 @@ class managment extends skeleton_main {
 	    echo '}';
 	}
 
+	public function get_persons() {
+
+		$persons = array();
+	    
+	    $persons = $this->managment_model->get_all_persons();    
+
+	    echo '{
+	    "aaData": ';
+
+	    print_r(json_encode($persons));
+
+	    echo '}';
+	}
+
+	public function get_users() {
+
+		$users = array();
+	    
+	    $users = $this->managment_model->get_all_users();    
+
+	    echo '{
+	    "aaData": ';
+
+	    print_r(json_encode($users));
+
+	    echo '}';
+	}
+
 	public function get_users_google_apps($academic_period_id = null) {
 
 		$users_google_apps = array();
@@ -1098,6 +1126,160 @@ class managment extends skeleton_main {
 		
 		$this->_load_body_footer();	
 		
+	}
+
+	public function persons() {
+		if (!$this->skeleton_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect($this->skeleton_auth->login_page, 'refresh');
+		}
+
+		$active_menu = array();
+		$active_menu['menu']='#managment';
+		$active_menu['submenu1']='#managment_persons';
+
+		$header_data = $this->load_ace_files($active_menu);
+
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			'http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css');		
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			base_url('assets/grocery_crud/themes/datatables/extras/TableTools/media/css/TableTools.css'));	
+		$header_data= $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/dataTables.colReorder.css'));
+        $header_data= $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/dataTables.colVis.css'));
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			base_url('assets/css/tooltipster.css'));	
+		$header_data= $this->add_css_to_html_header_data(
+                $header_data,
+                    "http://cdn.jsdelivr.net/select2/3.4.5/select2.css");
+		$header_data = $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/jquery.gritter.css'));  
+
+		//JS
+		
+			
+		$header_data= $this->add_javascript_to_html_header_data(
+			$header_data,
+			"http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js");					
+			
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/grocery_crud/themes/datatables/extras/TableTools/media/js/ZeroClipboard.js'));
+
+		$header_data= $this->add_javascript_to_html_header_data(
+			$header_data,
+			base_url("assets/grocery_crud/themes/datatables/extras/TableTools/media/js/TableTools.js"));
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/js/dataTables.colReorder.js'));
+        $header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/js/dataTables.colVis.js'));
+
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+            "http://cdn.jsdelivr.net/select2/3.4.5/select2.js");
+		$header_data= $this->add_javascript_to_html_header_data(
+	        $header_data,
+	        base_url('assets/js/jquery.gritter.min.js')); 
+			
+		$this->_load_html_header($header_data); 
+		
+		$this->_load_body_header();
+
+		$data = array();
+
+		$this->load->view('persons.php',$data);
+		
+		
+		$this->_load_body_footer();	
+
+	}
+
+	public function users() {
+		if (!$this->skeleton_auth->logged_in())
+		{
+			//redirect them to the login page
+			redirect($this->skeleton_auth->login_page, 'refresh');
+		}
+
+		$active_menu = array();
+		$active_menu['menu']='#managment';
+		$active_menu['submenu1']='#managment_users_not_gc';
+
+		$header_data = $this->load_ace_files($active_menu);
+
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			'http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css');		
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			base_url('assets/grocery_crud/themes/datatables/extras/TableTools/media/css/TableTools.css'));	
+		$header_data= $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/dataTables.colReorder.css'));
+        $header_data= $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/dataTables.colVis.css'));
+		$header_data= $this->add_css_to_html_header_data(
+			$header_data,
+			base_url('assets/css/tooltipster.css'));	
+		$header_data= $this->add_css_to_html_header_data(
+                $header_data,
+                    "http://cdn.jsdelivr.net/select2/3.4.5/select2.css");
+		$header_data = $this->add_css_to_html_header_data(
+            $header_data,
+            base_url('assets/css/jquery.gritter.css'));  
+
+		//JS
+		
+			
+		$header_data= $this->add_javascript_to_html_header_data(
+			$header_data,
+			"http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js");					
+			
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/grocery_crud/themes/datatables/extras/TableTools/media/js/ZeroClipboard.js'));
+
+		$header_data= $this->add_javascript_to_html_header_data(
+			$header_data,
+			base_url("assets/grocery_crud/themes/datatables/extras/TableTools/media/js/TableTools.js"));
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/js/dataTables.colReorder.js'));
+        $header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+                base_url('assets/js/dataTables.colVis.js'));
+
+		$header_data= $this->add_javascript_to_html_header_data(
+            $header_data,
+            "http://cdn.jsdelivr.net/select2/3.4.5/select2.js");
+		$header_data= $this->add_javascript_to_html_header_data(
+	        $header_data,
+	        base_url('assets/js/jquery.gritter.min.js')); 
+			
+		$this->_load_html_header($header_data); 
+		
+		$this->_load_body_header();
+
+		$data = array();
+
+		$data['posible_duplicated_users']= $this->managment_model->get_posible_duplicated_users();
+
+		$this->load->view('users.php',$data);
+		
+		
+		$this->_load_body_footer();	
+
 	}
 	
 	public function users_ldap($academic_period_id=null) {
