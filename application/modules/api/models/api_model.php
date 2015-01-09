@@ -114,7 +114,7 @@ class api_model  extends CI_Model  {
 		if ($query->num_rows() == 1){
 			$row = $query->row(); 
 
-			$person = new stdClass();
+			$person = new stdClass();						//Fem un objecte nou, el formatem al nostre gust
 
 			$person->id = $row->person_id;
 			$person->givenName = $row->person_givenName;
@@ -122,7 +122,7 @@ class api_model  extends CI_Model  {
 			$person->sn2 = $row->person_sn2;
 			$person->email = $row->person_email;
 			//...
-
+			
 			return $person;
 		}	
 		else
