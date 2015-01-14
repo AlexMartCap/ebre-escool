@@ -122,8 +122,13 @@ class api_model  extends CI_Model  {
 			$person->sn2 = $row->person_sn2;
 			$person->email = $row->person_email;
 			//...
+<<<<<<< HEAD
 			
 			return $person;
+=======
+
+				
+>>>>>>> origin/master
 		}	
 		else
 			return false;
