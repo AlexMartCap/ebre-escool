@@ -10,7 +10,6 @@
  * @link        http://acacha.org/meidawiki/index.php/ebre-escool
 */
 
-
 class ebreescool_api_test extends CI_Controller
 {
     function __construct()
