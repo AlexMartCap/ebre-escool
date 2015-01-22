@@ -18,7 +18,7 @@ class UFs_model  extends CI_Model{
 
     function getAllUFs(){
     	$this->db->select('study_submodules_id,study_submodules_shortname ,study_submodules_name,study_submodules_study_module_id,study_submodules_courseid,study_submodules_order,study_submodules_description,study_submodules_entryDate,study_submodules_last_update,study_submodules_creationUserId,study_submodules_lastupdateUserId,study_submodules_markedForDeletion,study_submodules_markedForDeletionDate');
-    	$this->db->from('uf');
+    	$this->db->from('study_submodules');
 		$query = $this->db->get();
 		//echo $this->db->last_query(). "<br/>";
 		$ufs = array();

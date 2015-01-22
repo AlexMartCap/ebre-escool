@@ -44,41 +44,18 @@ class ebreescool extends REST_Controller
     }
 
     /*
+    !!IMPORTANT!!
+    DEPRECATED. SEE CONTROLLER ebreescool_login.php
     For better security password have to be hasehd no original password!
     Tried passwords are logged!
     */
-    function login_post()
+    /*function login_post()
     {
         
-        log_message('debug', $this->LOGTAG . "login_post called");
-
-        $result = new stdClass();
-        $result->message = "LOGIN POST";
         
-        $username = $this->post('username');
-        $password = $this->post('password');
-        
-        $realm = $this->post('realm');
+    }*/
 
-        log_message('debug', $this->LOGTAG . "Username: " . $username);
-        log_message('debug', $this->LOGTAG . "Realm: " . $realm);
-
-        if(false)
-            {
-                $this->response(NULL, 400);
-            }
-
-        $result->username= $username;
-        $result->password= $password;
-        $result->realm= $realm;
-
-        //VALIDATION
-        if ($username == "" || !$result->username) {
-            log_message('debug', $this->LOGTAG . "Incorrect username value");
-            $result->message = "Incorrect username value";
-            $this->response($result, 400);
-        }
-
+<<<<<<< HEAD
         if ($password == "" || !$result->password) {
             log_message('debug', $this->LOGTAG . "Incorrect password value");
             $result->message = "Incorrect password value!";
@@ -153,6 +130,8 @@ class ebreescool extends REST_Controller
         }
         return false;
     }
+=======
+>>>>>>> origin/master
     
     function person_get()
     {
