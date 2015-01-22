@@ -4,7 +4,7 @@
  * UFs: study_submodules API
  *
  * @package     Ebre-escool
- * @subpackage  alexMartinez
+ * @subpackage  API
  * @category    Controller
  * @author         Alex Martinez Capilla
  * @link        http://acacha.org/meidawiki/index.php/ebre-escool
@@ -142,11 +142,11 @@ class ebreescool extends REST_Controller
         }
 
         // $study_submodules = $this->some_model->getSomething( $this->get('id') );
-        $study_submoduless = array(
+       /* $study_submoduless = array(
             1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
             2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
             3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => 'Is a Scott!', array('hobbies' => array('fartings', 'bikes'))),
-        );
+        );*/
         
         $study_submodules = @$study_submoduless[$this->get('id')];
         
