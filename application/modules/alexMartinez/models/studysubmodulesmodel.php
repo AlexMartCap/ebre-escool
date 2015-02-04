@@ -6,6 +6,7 @@
 * @author		Sergi Tur Badenas
 * @editedBy     Alex Martinez
 */
+
 class studysubmodulesmodel  extends CI_Model{
 	
 	function __construct()
@@ -54,19 +55,22 @@ class studysubmodulesmodel  extends CI_Model{
         // Cheching if we've got any row.
 		if ($query->num_rows()==1){
 			$row = $query->row();
+			
+			$study_submodule = new stdClass();
+
 			$study_submodule->id = $row->study_submodules_id;
-				$study_submodule->shortname = $row->study_submodules_shortname;
-				$study_submodule->name = $row->study_submodules_name;
-				$study_submodule->module_id = $row->study_submodules_study_module_id;
-				$study_submodule->courseid = $row->study_submodules_courseid;
-				$study_submodule->order = $row->study_submodules_order;
-				$study_submodule->description = $row->study_submodules_description;
-				$study_submodule->entryDate = $row->study_submodules_entryDate;
-				$study_submodule->last_update = $row->study_submodules_last_update;
-				$study_submodule->creationUserId = $row->study_submodules_creationUserId;
-				$study_submodule->lastupdateUserId = $row->study_submodules_lastupdateUserId;
-				$study_submodule->markedForDeletion = $row->study_submodules_markedForDeletion;
-				$study_submodule->markedForDeletionDate = $row->study_submodules_markedForDeletionDate;
+			$study_submodule->shortname = $row->study_submodules_shortname;
+			$study_submodule->name = $row->study_submodules_name;
+			$study_submodule->module_id = $row->study_submodules_study_module_id;
+			$study_submodule->courseid = $row->study_submodules_courseid;
+			$study_submodule->order = $row->study_submodules_order;
+			$study_submodule->description = $row->study_submodules_description;
+			$study_submodule->entryDate = $row->study_submodules_entryDate;
+			$study_submodule->last_update = $row->study_submodules_last_update;
+			$study_submodule->creationUserId = $row->study_submodules_creationUserId;
+			$study_submodule->lastupdateUserId = $row->study_submodules_lastupdateUserId;
+			$study_submodule->markedForDeletion = $row->study_submodules_markedForDeletion;
+			$study_submodule->markedForDeletionDate = $row->study_submodules_markedForDeletionDate;
 			
 			return $study_submodule;
 		}else{
@@ -108,6 +112,26 @@ class studysubmodulesmodel  extends CI_Model{
 			}
 		}
 	}
+
+	function getStudysubmoduleAlt($id){
+		/*
+		SELECT * FROM `person` WHERE person_id = id
+		*/
+		$this->db->select('*');
+		$this->db->from('study_submodules');
+		$this->db->where('study_submodules_id',1);
+		
+		$query = $this->db->get();
+		//echo $this->db->last_query(). "<br/>";
+
+		if ($query->num_rows() == 1){
+			$row = $query->row(); 
+			return $row;
+		}	
+		else {
+			return false;
+		}
+
+	}
 }
-?>
 
