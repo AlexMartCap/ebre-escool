@@ -1,4 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 |--------------------------------------------------------------------------
 | HTTP protocol
@@ -6,10 +7,11 @@
 |
 | Should the service accept only HTTPS requests or not?
 |
-| Default: FALSE
+|	Default: FALSE
 |
 */
 $config['force_https'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | REST Format
@@ -17,10 +19,11 @@ $config['force_https'] = FALSE;
 |
 | What format should the data be returned in by default?
 |
-| Default: xml
+|	Default: xml
 |
 */
 $config['rest_default_format'] = 'xml';
+
 /*
 |--------------------------------------------------------------------------
 | REST Status field name
@@ -28,10 +31,11 @@ $config['rest_default_format'] = 'xml';
 |
 | The field name for the status of the response
 |
-| 'status'
+|	'status'
 |
 */
 $config['rest_status_field_name'] = 'status';
+
 /*
 |--------------------------------------------------------------------------
 | REST message field name
@@ -39,10 +43,11 @@ $config['rest_status_field_name'] = 'status';
 |
 | The field name for the message inside the response
 |
-| 'error'
+|	'error'
 |
 */
 $config['rest_message_field_name'] = 'error';
+
 /*
 |--------------------------------------------------------------------------
 | Enable emulate request
@@ -50,10 +55,12 @@ $config['rest_message_field_name'] = 'error';
 |
 | Should we enable emulation of the request (e.g. used in Mootools request)?
 |
-| Default: TRUE
+|	Default: TRUE
 |
 */
 $config['enable_emulate_request'] = TRUE;
+
+
 /*
 |--------------------------------------------------------------------------
 | REST Realm
@@ -61,10 +68,11 @@ $config['enable_emulate_request'] = TRUE;
 |
 | Name for the password protected REST API displayed on login dialogs
 |
-| E.g: My Secret REST API
+|	E.g: My Secret REST API
 |
 */
 $config['rest_realm'] = 'REST API';
+
 /*
 |--------------------------------------------------------------------------
 | REST Login
@@ -72,11 +80,12 @@ $config['rest_realm'] = 'REST API';
 |
 | Is login required and if so, which type of login?
 |
-| '' = no login required, 'basic' = unsecure login, 'digest' = more secure login,
-| 'session' = check for PHP session variable. Set variable name below.
+|	'' = no login required, 'basic' = unsecure login, 'digest' = more secure login,
+|	'session' = check for PHP session variable. Set variable name below.
 |
 */
 $config['rest_auth'] = false;
+
 /*
 |--------------------------------------------------------------------------
 | REST Login
@@ -84,12 +93,14 @@ $config['rest_auth'] = false;
 |
 | Is login required and if so, which user store do we use?
 |
-| '' = use config based users, 'ldap' = use LDAP authencation, 'library' = use a authentication library
-| If 'rest_auth' is 'session' then set 'auth_source' to the name of the session variable to check for.
+|	'' = use config based users, 'ldap' = use LDAP authencation, 'library' = use a authentication library
+|	If 'rest_auth' is 'session' then set 'auth_source' to the name of the session variable to check for.
 |
 */
+
 //change this to '' for wildcard unit test
 $config['auth_source'] = 'ldap';
+
 /*
 |--------------------------------------------------------------------------
 | REST Login
@@ -101,11 +112,12 @@ $config['auth_source'] = 'ldap';
 | In other cases override the function _perform_library_auth in your controller
 |
 | For digest authentication the library function should return already stored md5(username:restrealm:password) for that username
-| E.g: md5('admin:REST API:1234') = '1e957ebc35631ab22d5bd6526bd14ea2'
+|	E.g: md5('admin:REST API:1234') = '1e957ebc35631ab22d5bd6526bd14ea2'
 |
 */
 $config['auth_library_class'] = '';
 $config['auth_library_function'] = '';
+
 /*
 |--------------------------------------------------------------------------
 | Override auth types for specific class/method
@@ -113,14 +125,14 @@ $config['auth_library_function'] = '';
 |
 | Set specific authentication types for methods within a class (controller)
 |
-| Set as many config entries as needed. Any methods not set will use the default 'rest_auth' config value.
+| Set as many config entries as needed.  Any methods not set will use the default 'rest_auth' config value.
 |
 | example:
 |
-| $config['auth_override_class_method']['deals']['view'] = 'none';
-| $config['auth_override_class_method']['deals']['insert'] = 'digest';
-| $config['auth_override_class_method']['accounts']['user'] = 'basic';
-| $config['auth_override_class_method']['dashboard']['*'] = 'none|digest|basic';
+|			$config['auth_override_class_method']['deals']['view'] = 'none';
+|			$config['auth_override_class_method']['deals']['insert'] = 'digest';
+|			$config['auth_override_class_method']['accounts']['user'] = 'basic';
+|			$config['auth_override_class_method']['dashboard']['*'] = 'none|digest|basic';
 |
 | Here 'deals', 'accounts' and 'dashboard' are controller names, 'view', 'insert' and 'user' are methods within. An asterisk may also be used to specify an authentication method for an entire classes methods. Ex: $config['auth_override_class_method']['dashboard']['*'] = 'basic'; (NOTE: leave off the '_get' or '_post' from the end of the method name)
 | Acceptable values are; 'none', 'digest' and 'basic'.
@@ -130,6 +142,8 @@ $config['auth_library_function'] = '';
 // $config['auth_override_class_method']['deals']['insert'] = 'digest';
 // $config['auth_override_class_method']['accounts']['user'] = 'basic';
 // $config['auth_override_class_method']['dashboard']['*'] = 'basic';
+
+
 //---Uncomment list line for the wildard unit test
 //$config['auth_override_class_method']['wildcard_test_cases']['*'] = 'basic';
 /*
@@ -139,10 +153,11 @@ $config['auth_library_function'] = '';
 |
 | Array of usernames and passwords for login, if ldap is configured this is ignored
 |
-| array('admin' => '1234')
+|	array('admin' => '1234')
 |
 */
 $config['rest_valid_logins'] = array('admin' => '1234');
+
 /*
 |--------------------------------------------------------------------------
 | Global IP Whitelisting
@@ -152,13 +167,14 @@ $config['rest_valid_logins'] = array('admin' => '1234');
 |
 | Usage:
 | 1. Set to true *and* select an auth option for extreme security (client's IP
-| address must be in whitelist and they must also log in)
+|	 address must be in whitelist and they must also log in)
 | 2. Set to true with auth set to false to allow whitelisted IPs access with no login.
 | 3. Set to false here but set 'auth_override_class_method' to 'whitelist' to
-| restrict certain methods to IPs in your whitelist
+|	 restrict certain methods to IPs in your whitelist
 |
 */
 $config['rest_ip_whitelist_enabled'] = false;
+
 /*
 |--------------------------------------------------------------------------
 | REST IP Whitelist
@@ -173,6 +189,7 @@ $config['rest_ip_whitelist_enabled'] = false;
 |
 */
 $config['rest_ip_whitelist'] = '';
+
 /*
 |--------------------------------------------------------------------------
 | Global IP Blacklisting
@@ -185,6 +202,7 @@ $config['rest_ip_whitelist'] = '';
 |
 */
 $config['rest_ip_blacklist_enabled'] = false;
+
 /*
 |--------------------------------------------------------------------------
 | REST IP Blacklist
@@ -197,6 +215,7 @@ $config['rest_ip_blacklist_enabled'] = false;
 |
 */
 $config['rest_ip_blacklist'] = '';
+
 /*
 |--------------------------------------------------------------------------
 | REST Database Group
@@ -205,10 +224,11 @@ $config['rest_ip_blacklist'] = '';
 | Connect to a database group for keys, logging, etc. It will only connect
 | if you have any of these features enabled.
 |
-| 'default'
+|	'default'
 |
 */
 $config['rest_database_group'] = 'default';
+
 /*
 |--------------------------------------------------------------------------
 | REST API Keys Table Name
@@ -216,10 +236,11 @@ $config['rest_database_group'] = 'default';
 |
 | The table name in your database that stores API Keys.
 |
-| 'keys'
+|	'keys'
 |
 */
 $config['rest_keys_table'] = 'keys';
+
 /*
 |--------------------------------------------------------------------------
 | REST Enable Keys
@@ -228,20 +249,22 @@ $config['rest_keys_table'] = 'keys';
 | When set to true REST_Controller will look for a key and match it to the DB.
 | If no key is provided, the request will return an error.
 |
-| FALSE
-CREATE TABLE `keys` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`key` varchar(40) NOT NULL,
-`level` int(2) NOT NULL,
-`ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
-`is_private_key` tinyint(1) NOT NULL DEFAULT '0',
-`ip_addresses` TEXT NULL DEFAULT NULL,
-`date_created` int(11) NOT NULL,
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+|	FALSE
+
+	CREATE TABLE `keys` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `key` varchar(40) NOT NULL,
+	  `level` int(2) NOT NULL,
+	  `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
+	  `is_private_key` tinyint(1)  NOT NULL DEFAULT '0',
+	  `ip_addresses` TEXT NULL DEFAULT NULL,
+	  `date_created` int(11) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
 $config['rest_enable_keys'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | REST Table Key Column Name
@@ -252,6 +275,7 @@ $config['rest_enable_keys'] = FALSE;
 |
 */
 $config['rest_key_column'] = 'key';
+
 /*
 |--------------------------------------------------------------------------
 | REST Key Length
@@ -259,11 +283,12 @@ $config['rest_key_column'] = 'key';
 |
 | How long should created keys be? Double check this in your db schema.
 |
-| Default: 32
-| Max: 40
+|	Default: 32
+|	Max: 40
 |
 */
 $config['rest_key_length'] = 40;
+
 /*
 |--------------------------------------------------------------------------
 | REST API Key Variable
@@ -275,6 +300,7 @@ $config['rest_key_length'] = 40;
 |
 */
 $config['rest_key_name'] = 'X-API-KEY';
+
 /*
 |--------------------------------------------------------------------------
 | REST API Logs Table Name
@@ -282,10 +308,11 @@ $config['rest_key_name'] = 'X-API-KEY';
 |
 | The table name in your database that stores logs.
 |
-| 'logs'
+|	'logs'
 |
 */
 $config['rest_logs_table'] = 'logs';
+
 /*
 |--------------------------------------------------------------------------
 | REST Enable Logging
@@ -295,23 +322,25 @@ $config['rest_logs_table'] = 'logs';
 | time and IP address. This is a general rule that can be overridden in the
 | $this->method array in each controller.
 |
-| FALSE
+|	FALSE
 |
-CREATE TABLE `logs` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`uri` varchar(255) NOT NULL,
-`method` varchar(6) NOT NULL,
-`params` text DEFAULT NULL,
-`api_key` varchar(40) NOT NULL,
-`ip_address` varchar(45) NOT NULL,
-`time` int(11) NOT NULL,
-`rtime` float DEFAULT NULL,
-`authorized` tinyint(1) NOT NULL,
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	CREATE TABLE `logs` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `uri` varchar(255) NOT NULL,
+	  `method` varchar(6) NOT NULL,
+	  `params` text DEFAULT NULL,
+	  `api_key` varchar(40) NOT NULL,
+	  `ip_address` varchar(45) NOT NULL,
+	  `time` int(11) NOT NULL,
+	  `rtime` float DEFAULT NULL,
+	  `authorized` tinyint(1) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
 $config['rest_enable_logging'] = FALSE;
+
+
 /*
 |--------------------------------------------------------------------------
 | REST API Access Table Name
@@ -319,32 +348,35 @@ $config['rest_enable_logging'] = FALSE;
 |
 | The table name in your database that stores the access controls.
 |
-| 'access'
+|	'access'
 |
 */
 $config['rest_access_table'] = 'access';
+
 /*
 |--------------------------------------------------------------------------
-| REST Method Access Control
+| REST Method Access Control 
 |--------------------------------------------------------------------------
 |
-| When set to true REST_Controller will check the access table to see if
-| the API KEY can access that controller. rest_enable_keys *must* be enabled
-| to use this.
+| When set to true REST_Controller will check the access table to see if 
+| the API KEY can access that controller.  rest_enable_keys *must* be enabled
+| to use this. 
 |
-| FALSE
+|	FALSE
 |
 CREATE TABLE `access` (
-`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-`key` varchar(40) NOT NULL DEFAULT '',
-`controller` varchar(50) NOT NULL DEFAULT '',
-`date_created` datetime DEFAULT NULL,
-`date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-PRIMARY KEY (`id`)
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `key` varchar(40) NOT NULL DEFAULT '',
+  `controller` varchar(50) NOT NULL DEFAULT '',
+  `date_created` datetime DEFAULT NULL,
+  `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
 $config['rest_enable_access'] = FALSE;
+
+
 /*
 |--------------------------------------------------------------------------
 | REST API Param Log Format
@@ -355,6 +387,7 @@ $config['rest_enable_access'] = FALSE;
 |
 */
 $config['rest_logs_json_params'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | REST API Limits Table Name
@@ -362,10 +395,11 @@ $config['rest_logs_json_params'] = FALSE;
 |
 | The table name in your database that stores limits.
 |
-| 'limits'
+|	'limits'
 |
 */
 $config['rest_limits_table'] = 'limits';
+
 /*
 |--------------------------------------------------------------------------
 | REST Enable Limits
@@ -375,23 +409,26 @@ $config['rest_limits_table'] = 'limits';
 | by an API key each hour. This is a general rule that can be overridden in the
 | $this->method array in each controller.
 |
-| FALSE
+|	FALSE
 |
-CREATE TABLE `limits` (
-`id` int(11) NOT NULL AUTO_INCREMENT,
-`uri` varchar(255) NOT NULL,
-`count` int(10) NOT NULL,
-`hour_started` int(11) NOT NULL,
-`api_key` varchar(40) NOT NULL,
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	CREATE TABLE `limits` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `uri` varchar(255) NOT NULL,
+	  `count` int(10) NOT NULL,
+	  `hour_started` int(11) NOT NULL,
+	  `api_key` varchar(40) NOT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
-| To specify limits, within your Controller __construct() method add per-method
+| To specify limits, within your Controller __construct() method add per-method 
 | limits with:
-$this->method['METHOD_NAME']['limit'] = [NUM_REQUESTS_PER_HOUR];
-| See application/controllers/api/example.php for examples.
+
+ $this->method['METHOD_NAME']['limit'] = [NUM_REQUESTS_PER_HOUR];
+ 
+| See application/controllers/api/example.php for examples. 
 */
 $config['rest_enable_limits'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | REST Ignore HTTP Accept
@@ -400,10 +437,11 @@ $config['rest_enable_limits'] = FALSE;
 | Set to TRUE to ignore the HTTP Accept and speed up each request a little.
 | Only do this if you are using the $this->rest_format or /format/xml in URLs
 |
-| FALSE
+|	FALSE
 |
 */
 $config['rest_ignore_http_accept'] = FALSE;
+
 /*
 |--------------------------------------------------------------------------
 | REST AJAX Only
@@ -414,9 +452,10 @@ $config['rest_ignore_http_accept'] = FALSE;
 | requests are accepted." will be returned. This is good for production
 | environments. Set to FALSE to also accept HTTP requests.
 |
-| FALSE
+|	FALSE
 |
 */
 $config['rest_ajax_only'] = FALSE;
+
 /* End of file config.php */
 /* Location: ./system/application/config/rest.php */
