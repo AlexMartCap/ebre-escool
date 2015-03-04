@@ -40,7 +40,7 @@ class ebreescool_login extends REST_Controller
     }
 
     /*
-    For better security password have to be hasehd no original password!
+    For better security password have to be hashed. PLEASE NOT USE original passwords!
     BE CAREFUL! Passwords are logged to codeigniter log files at application/logs folder!
 
     AND ESPECIFIC API_KEY IS USED ONLY AUTHORIZED FOR LOGIN. Configure your database!
@@ -84,11 +84,13 @@ class ebreescool_login extends REST_Controller
             $this->response($result, 400);
         }
 
-        //Check if username exists
+        //Check if username exists --> Return 404 NOT FOUND!
         // TODO
 
         $this->skeleton_auth->skeleton_auth_model->setRealm($realm);
         
+        log_message('debug', $this->LOGTAG . "password $password");
+
         if ($this->skeleton_auth->login($username, $password, false, true)) {
             //login is successful
             log_message('debug', $this->LOGTAG . "Login successful");
@@ -97,14 +99,9 @@ class ebreescool_login extends REST_Controller
             $sessiondata = $this->ebre_escool_auth_model->getSessionData($username); 
             $result->sessiondata = $sessiondata;
 
-            $api_user_profile = new stdClass();
-            $api_user_profile->username = $username;
-            $api_user_profile->prova = "TEST";
-            $api_user_profile->another = "TEST 1";
-
-            //TODO: Provides auth token for api access
-
+            $api_user_profile = $this->ebre_escool_auth_model->getApiUserProfile($username);
             $result->api_user_profile = $api_user_profile;
+
             log_message('debug', $this->LOGTAG . " username: " . $username . " logged ok!");
             $this->response($result, 200);   
         } else {
