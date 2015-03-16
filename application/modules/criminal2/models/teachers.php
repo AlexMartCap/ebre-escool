@@ -31,7 +31,6 @@ function getAllTeachers() {
     teacher_lastupdateUserId,teacher_markedForDeletion, 
     teacher_markedForDeletionDate , person_officialid');
     $this->db->from('teacher');
-    $this->db->where('teacher_markedForDeletion','n');
     $query = $this->db->get();
     //echo $this->db->last_query(). "<br/>";
     
@@ -149,7 +148,6 @@ function getAllTeachers() {
             $this->db->insert('teacher',$data);
 
             $row = $this->db->affected_rows();
-            //log_message('debug','insert response:'.$row);
             $id = $this->db->insert_id();
             $result=array();
             $result['id'] = $id;

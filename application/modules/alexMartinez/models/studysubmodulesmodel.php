@@ -8,7 +8,7 @@
 */
 
 class studysubmodulesmodel  extends CI_Model{
-	
+		
 	function __construct()
 	{
         parent::__construct();
@@ -103,35 +103,28 @@ class studysubmodulesmodel  extends CI_Model{
     }
 
 	function insertStudysubmodule($data){
-		if ($data){
-			$this->db->insert('study_submodules',$data);
-			if(!$query->num_rows()==0){
-				return true;
-			}else{
-				return false;
-			}
-		}
-	}
+        
+        if ($data){
+          //Make the insert
+            $this->db->insert('study_submodules',$data);
 
-	function getStudysubmoduleAlt($id){
-		/*
-		SELECT * FROM `person` WHERE person_id = id
-		*/
-		$this->db->select('*');
-		$this->db->from('study_submodules');
-		$this->db->where('study_submodules_id',1);
-		
-		$query = $this->db->get();
-		//echo $this->db->last_query(). "<br/>";
+            $row = $this->db->affected_rows();
+            //log_message('debug','insert response:'.$row);
+            $id = $this->db->insert_id();
+            $result=array();
+            $result['id'] = $id;
+            //Check if it have gone right and return response
+            if($row ==1){
+              $response = true;
+               $result['response'] = $response;
+             
+              }else{
+                $response = false;
+                $result['response'] = $response;
+              }
+              return $result;
 
-		if ($query->num_rows() == 1){
-			$row = $query->row(); 
-			return $row;
-		}	
-		else {
-			return false;
-		}
-
-	}
+        }
+    }
 }
 

@@ -11,12 +11,11 @@
 */
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
+ //Carrega la llibreria
 require APPPATH.'/libraries/REST_Controller.php';
 
 class studysubmodules extends REST_Controller
 {
-
-    public $LOGTAG = "EBRE_ESCOOL API: ";
 
     //Carrega el constructor pare
     function __construct()
@@ -34,127 +33,37 @@ class studysubmodules extends REST_Controller
         //Load model
         $this->load->model('studysubmodulesmodel');
     }
+    
+#############################################################################################
 
-############################################################################################
-
-    public function index_get(){
-        
+    public function index_get(){  
         $this->studysubmodules_get();
         
     }
 
-    function login_post()
-    {
 
-        log_message('debug', $this->LOGTAG . "login_post called");
-
-        $result = new stdClass();
-        $result->message = "LOGIN POST";
-
-        $username = $this->post('username');
-        $password = $this->post('password');
-        $realm = $this->post('realm');
-
-        log_message('debug', $this->LOGTAG . "Username: " . $username);
-        log_message('debug', $this->LOGTAG . "Realm: " . $realm);
-
-        if(false)
-        {
-            $this->response(NULL, 400);
-        }
-
-        $result->username= $username;
-        $result->password= $password;
-        $result->realm= $realm;
-
-        //VALIDATION
-        if ($username == "" || !$result->username) {
-            log_message('debug', $this->LOGTAG . "Incorrect username value");
-            $result->message = "Incorrect username value";
-            $this->response($result, 400);
-        }
-
-        if ($password == "" || !$result->password) {
-            log_message('debug', $this->LOGTAG . "Incorrect username value");
-            $result->message = "Incorrect username value!";
-            $this->response($result, 400);
-        }
-
-        if ($realm == "" || !$result->realm || !$this->validate_realm($realm) ) {
-            log_message('debug', $this->LOGTAG . "No valid realm specified");
-            $result->message = "No valid realm specified!";
-            $this->response($result, 400);
-        }
-
-        //Check if username exists
-        // TODO
-
-        $this->skeleton_auth->skeleton_auth_model->setRealm($realm);
-        //$remember = (bool) $this->input->post('remember');
-
-        if ($this->skeleton_auth->login($username, $password, false))
-        {
-            //login is successful
-            log_message('debug', $this->LOGTAG . "Login successful");
-            $result->message = "Login successful!";
-
-            $sessiondata = $this->ebre_escool_auth_model->getSessionData($username); 
-            $result->sessiondata = $sessiondata;
-
-            $api_user_profile = new stdClass();
-            $api_user_profile->username = $username;
-            $api_user_profile->prova = "TEST";
-            $api_user_profile->another = "TEST 1";
-            $result->api_user_profile = $api_user_profile;
-            $this->response($result, 200);   
-        }
-        else
-        {
-            //if the login was un-successful
-            log_message('debug', $this->LOGTAG . "Login not successful");
-            $result->message = "Login not successful!";
-            $this->response($result, 400);   
-        }
-
-        if (false) {
-            log_message('debug', $this->LOGTAG . " username: " . $username . " does not exists!");
-            $result->message = "Username does not exists!";
-            $this->response($result, 404);
-        }
-
-        log_message('debug', $this->LOGTAG . " username: " . $username . " logged ok!");
-        $this->response($result, 200); // 200 being the HTTP response code
-    }
-    
-    function validate_realm($realm){
-
-        if ( (strcasecmp ( $realm , "ldap" ) == 0) || (strcasecmp ( $realm , "mysql" ) == 0) ) {
-            return true;
-        }
-        return false;
-    }
-
-############################################################################################
+#############################################################################################
 
     //get just one study_submodules with id
     function studysubmodule_get()
     {
+        //obtenir l'identificado que se li passa en la url
         if(!$this->get('id'))
         {
+            //Si no hi ha identificador s'envia el codi de resposta
+            $message = array('id'=>'','message'=>'YOU MUST SEND AN ID');
             $this->response(NULL, 400);
         }
 
-        $study_submodule = $this->studysubmodulesmodel->getstudysubmodule( $this->get('id') );
-        //$study_submodules = $this->studysubmodulesmodel->getPersonAlt( $this->get('id') );
-        
+        $study_submodule = $this->studysubmodulesmodel->getstudysubmodule( $this->get('id') );      
         /*$persons = array(
             1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
             2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
             3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => 'Is a Scott!', array('hobbies' => array('fartings', 'bikes'))),
-        );
-        
-        $person = @$persons[$this->get('id')];
-        */
+        );*/
+        //$person = @$persons[$this->get('id')]; 
+
+        //If exists $study_submodule everything it's ok
         if($study_submodule)
         {
             $this->response($study_submodule, 200); // 200 being the HTTP response code
@@ -162,75 +71,65 @@ class studysubmodules extends REST_Controller
 
         else
         {
-            $this->response(array('error' => 'study submodule could not be found'), 404);
+            $this->response(array('id' => $this->get('id'),'message' => 'STUDY SUBMODULE NOT EXISTS!'), 404);        
         }
     }
-    
 #############################################################################################
-
-    function studysubmodules_get()
-    {
-        //$persons = $this->some_model->getSomething( $this->get('limit') );
-        /*$persons = array(
-            array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com'),
-            array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com'),
-            3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => array('hobbies' => array('fartings', 'bikes'))),
-        );*/
-        $studysubmodules = $this->studysubmodulesmodel->getstudysubmodules();
-
-        if($studysubmodules)
-        {
-            $this->response($studysubmodules, 200); // 200 being the HTTP response code
-        }
-        else
-        {
-            $this->response(array('error' => 'Couldn\'t find any study submodules!'), 404);
-        }
-    }
-
-############################################################################################
-
+    //Create new Study submodule
     function studysubmodule_post()
     {
-        //$this->some_model->updateperson( $this->get('id') );
+        /*if(isset($_POST)){
+        $message = array('id' => $this->input->get_post('id'), 'date' => $this->input->get_post('studysubmodule_entryDate'));
+        $this->response($message, 200);
+        }*/
+        if (isset($_POST)){
+            //GET DATA FROM POST
+            $postdata = file_get_contents("php://input");
+            //log_message('debug',$postdata);
+            $studySubmodulesObject = json_decode($postdata);
+
+             $data = array(
+            'study_submodules_shortname'=>$studySubmodulesObject->{'shortname'},
+            'study_submodules_name'=>$studySubmodulesObject->{'name'},
+            'study_submodules_study_module_id'=>$studySubmodulesObject->{'study_module_id'},
+            'study_submodules_courseid'=>$studySubmodulesObject->{'course_id'},
+            'study_submodules_order'=>$studySubmodulesObject->{'order'},
+            'study_submodules_description'=>$studySubmodulesObject->{'description'},
+            'study_submodules_creationUserid'=>$studySubmodulesObject->{'creator_user_id'},
+            'study_submodules_entryDate'=>$studySubmodulesObject->{'entry_date'},
+            'study_submodules_lastupdateUserId'=>$studySubmodulesObject->{'last_update_user_id'},
+            'study_submodules_markedForDeletion'=>$studySubmodulesObject->{'marked_for_deletion'},
+            'study_submodules_markedForDeletionDate'=>$studySubmodulesObject->{'marked_for_deletion_date'});
+                   
+             //CALL TO MODEL
+        $response = $this->studysubmodules->insertStudy($data);
+        }
         //$message = array('id' => $this->get('id'), 'name' => $this->post('name'), 'email' => $this->post('email'), 'message' => 'ADDED!');
-        
-        //$this->response($message, 200); // 200 being the HTTP response code
-        
-        if (isset($_POST))
-        {
-            $id = $this->input->get_post('id');
-            $data = array('study_submodules_name'=>$this->input->get_post('study_submodules_name'));
-            $response = $this->studysubmodulesmodel->updatestudysubmodules($id,$data);
-        }
-        
-        if($response)
-        {
-            $message = array('id' => $id, 'message' => 'UPDATED!');
-            $this->response($message, 200); // 200 being the HTTP response code
-        }
-        else
-        {
-            $message = array('id' =>$id, 'message' => 'ERROR UPDATING!');
-            $this->response($message, 422); // 422 being the HTTP response code
+       
+        if($response['response']){
+          $message = array('id' => $response['id'], 'message' => 'NEW STUDY SUBMODULE INSERTED!');
+          $this->response($message, 200); // 200 being the HTTP response code
+        }else{
+            $message = array('id' =>$response['id'], 'message' => 'ERROR INSERTING!');
+            $this->response($message, 404); // 404 being the HTTP response code(Not Found)
         }
     }
     
 ############################################################################################
-
+    //Delete study submodule using the id
     function studysubmodule_delete()
     {
-        //$this->some_model->deletesomething( $this->get('id') );
-        //$message = array('id' => $this->get('id'), 'message' => 'DELETED!');
-        
-        //$this->response($message, 200); // 200 being the HTTP response code
-        
+        //test if user sends the id
         if(!$this->get('id'))
         {
+            //Si no hay identificador se manda el código de respuesta
+            $message = array('id'=>'','message'=>'YOU MUST SEND AN ID');
             $this->response(NULL, 400);
         }
+        log_message('debug',"delete id: ".$this->get('id'));
 
         $response = $this->studysubmodulesmodel->deletestudysubmodule( $this->get('id') );
+        
         if($response)
         {
             $message = array('id' => $this->get('id'), 'message' => 'DELETED!');
@@ -245,6 +144,92 @@ class studysubmodules extends REST_Controller
     }
 
 ############################################################################################
+    function studysubmodules_get()
+    {
+        //$persons = $this->some_model->getSomething( $this->get('limit') );
+        /*$persons = array(
+            array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com'),
+            array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com'),
+            3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => array('hobbies' => array('fartings', 'bikes'))),
+        );*/
+        //Get all studysubmodules from studysubmoduleS table
+        $studysubmodules = $this->studysubmodulesmodel->getstudysubmodules();
+
+        if($studysubmodules)
+        {
+            $this->response($studysubmodules, 200); // 200 being the HTTP response code
+        }
+        else
+        {
+            $this->response(array('id' => $this->get('id'),'message' => 'Couldn\'t find any study submodules!'), 404);
+        }
+    }
+
+############################################################################################
+
+    //UPDATE studysubmodules
+    function studysubmodule_put(){
+        //GET THE ID
+         $id = $this->put('id');
+        //Get the array we send from RestClient
+        $data = array(
+            'study_submodules_shortname'=>$this->put('shortname'),
+            'study_submodules_name'=>$this->put('shortname'),
+            'study_submodules_study_module_id'=>$this->put('shortname'),
+            'study_submodules_courseid'=>$this->put('course_id'),
+            'study_submodules_order'=>$this->put('order'),
+            'study_submodules_description'=>$this->put('description'),
+            'study_submodules_creationUserid'=>$this->put('creator_id'),
+            'study_submodules_entryDate'=>$this->put('entry_date'),
+            'study_submodules_lastupdateUserId'=>$this->put('last_update_user_id'),
+            'study_submodules_markedForDeletion'=>$this->put('marked_for_deletion'),
+            'study_submodules_markedForDeletionDate'=>$this->put('marked_for_deletion_date'));  
+            
+         //Call inset method in model
+         $updateResponse = $this->studysubmodules->updateStudySubmodule($id,$data);
+         //echo $insertResponse['response']." ".$insertResponse['id'];
+         
+         //Response
+         if($updateResponse){
+            $message = array('id' => $id,'message' => 'UPDATED!');
+            $this->response($message,200);//200 being the HTTP response code
+
+         }else{
+            $message = array('id' => $id, 'message' => 'ERROR UPDATING!');
+            $this->response($message, 422); // 422 being the HTTP response code
+         }
+
+        
+    }
+
+############################################################################################  
+
+    //mark for deletion update
+    function markForDeletion_put(){
+        
+            //Today
+            $today = date('Y-m-d H:i:s');
+            $id = $this->put('id');
+             $data = array(
+            'teacher_markedForDeletion'=>$this->put('marked_for_deletion'),
+            'teacher_markedForDeletionDate'=>$today);
+           
+             //CALL TO MODEL
+             $response = $this->studysubmodules->updateStudySubmodule($id,$data);
+        
+    
+       
+        if($response){
+          $message = array('id' => $id, 'message' => 'UPDATED!');
+          $this->response($message, 200); // 200 being the HTTP response code
+        }else{
+            $message = array('id' =>$id, 'message' => 'ERROR UPDATING!');
+            $this->response($message, 404); // 404 being the HTTP response code(Not Found)
+        }
+    
+    }
+
+############################################################################################  
 
     public function send_post()
     {
