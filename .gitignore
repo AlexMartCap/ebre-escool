@@ -32,5 +32,6 @@ migration/
 tools/sync_explotation_to_development_config.php
 
 /vendor/
+/.env
 /resources/views/app2.blade.php
 /resources/views/app3.blade.php
