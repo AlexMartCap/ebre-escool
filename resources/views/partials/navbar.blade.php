@@ -192,6 +192,7 @@
                             <i class="ace-icon fa fa-envelope-o"></i>
                             5 Messages
                         </li>
+                        </li>
 
                         <li class="dropdown-content">
                             <ul class="dropdown-menu dropdown-navbar">
