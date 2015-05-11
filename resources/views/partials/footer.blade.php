@@ -4,7 +4,7 @@
         <div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">Laravel Ace</span>
-							Application &copy; 2013-2015
+							Ebre-escool &copy; 2015
 						</span>
 
             &nbsp; &nbsp;

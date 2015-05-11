@@ -22,7 +22,7 @@
             <a href="#" class="navbar-brand">
                 <small>
                     <i class="fa fa-leaf"></i>
-                    Laravel Ace Admin
+                    Ebre-escool
                 </small>
             </a>
 
