@@ -13,10 +13,14 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+//Route::get('home', 'HomeController@index');
+
+Route::get('home', function(){
+    return View::make('layout');
+});
 
 Route::get('/', function(){
-    return View::make('layout');
+    return View::make('auth/login');
 });
 
 Route::controllers([
