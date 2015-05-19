@@ -26,5 +26,4 @@ Route::get('home', function(){
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-    'plans' => 'PlansController',
 ]);
