@@ -14,7 +14,7 @@ class AddActiveFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->tinyInteger('active');
         });
     }
 
@@ -29,7 +29,7 @@ class AddActiveFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'active'
             );
         });
 

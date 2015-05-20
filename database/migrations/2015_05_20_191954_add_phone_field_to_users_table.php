@@ -14,7 +14,7 @@ class AddPhoneFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->string('phone');
         });
     }
 
@@ -29,7 +29,7 @@ class AddPhoneFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'phone'
             );
         });
 

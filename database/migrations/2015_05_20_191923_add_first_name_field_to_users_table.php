@@ -14,7 +14,7 @@ class AddFirstNameFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->string('first_name');
         });
     }
 
@@ -29,7 +29,7 @@ class AddFirstNameFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'first_name'
             );
         });
 

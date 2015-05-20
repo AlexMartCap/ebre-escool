@@ -14,7 +14,7 @@ class AddRememberCodeFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->string('remember_code');
         });
     }
 
@@ -29,7 +29,7 @@ class AddRememberCodeFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'remember_code'
             );
         });
 

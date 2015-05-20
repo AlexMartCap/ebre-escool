@@ -14,7 +14,7 @@ class AddCompanyFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->string('company');
         });
     }
 
@@ -29,7 +29,7 @@ class AddCompanyFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'company'
             );
         });
 

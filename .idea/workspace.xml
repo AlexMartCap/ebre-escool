@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2e8502b8-9093-4ef0-a394-e038b40eff20" name="Default" comment="" />
+    <list default="true" id="2e8502b8-9093-4ef0-a394-e038b40eff20" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191342_add_forgotten_password_code_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191342_add_forgotten_password_code_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191356_add_forgotten_password_time_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191356_add_forgotten_password_time_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191414_add_remember_code_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191414_add_remember_code_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191904_add_active_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191904_add_active_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191923_add_first_name_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191923_add_first_name_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191931_add_last_name_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191931_add_last_name_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191943_add_company_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191943_add_company_field_to_users_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_05_20_191954_add_phone_field_to_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/2015_05_20_191954_add_phone_field_to_users_table.php" />
+    </list>
     <ignored path="ebre-escool.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -73,6 +82,8 @@
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_185505_add_mainOrganizationaUnitId_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191103_add_salt_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191208_add_secondary_email_field_to_users_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191236_add_activation_code_field_to_users_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191304_add_forgotten_password_realm_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191342_add_forgotten_password_code_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191356_add_forgotten_password_time_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191414_add_remember_code_field_to_users_table.php" />
@@ -81,8 +92,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191931_add_last_name_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191943_add_company_field_to_users_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191954_add_phone_field_to_users_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191236_add_activation_code_field_to_users_table.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2015_05_20_191304_add_forgotten_password_realm_field_to_users_table.php" />
       </list>
     </option>
   </component>
@@ -589,70 +598,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191342_add_forgotten_password_code_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191356_add_forgotten_password_time_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191414_add_remember_code_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191904_add_active_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191923_add_first_name_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191931_add_last_name_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191943_add_company_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.0" vertical-offset="0" max-vertical-offset="756">
-          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191954_add_phone_field_to_users_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49247605" vertical-offset="0" max-vertical-offset="756">
-          <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191103_add_salt_field_to_users_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8618331" vertical-offset="0" max-vertical-offset="774">
@@ -681,6 +626,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.54172367" vertical-offset="0" max-vertical-offset="756">
           <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191342_add_forgotten_password_code_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51709986" vertical-offset="0" max-vertical-offset="756">
+          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191356_add_forgotten_password_time_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36935705" vertical-offset="0" max-vertical-offset="756">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191414_add_remember_code_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.0" vertical-offset="0" max-vertical-offset="756">
+          <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191904_add_active_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46785226" vertical-offset="0" max-vertical-offset="756">
+          <caret line="20" column="7" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191923_add_first_name_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7879617" vertical-offset="0" max-vertical-offset="756">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191931_add_last_name_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.54172367" vertical-offset="0" max-vertical-offset="756">
+          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191943_add_company_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36935705" vertical-offset="0" max-vertical-offset="756">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_05_20_191954_add_phone_field_to_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7387141" vertical-offset="0" max-vertical-offset="756">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
           <folding />
         </state>
       </provider>

@@ -14,7 +14,7 @@ class AddForgottenPasswordTimeFieldToUsersTable extends Migration {
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->integer('mainOrganizationaUnitId');
+            $table->string('forgotten_password_time');
         });
     }
 
@@ -29,7 +29,7 @@ class AddForgottenPasswordTimeFieldToUsersTable extends Migration {
         Schema::table('users', function(Blueprint $table)
         {
             $table->dropColumn(
-                'mainOrganizationaUnitId'
+                'forgotten_password_time'
             );
         });
 
