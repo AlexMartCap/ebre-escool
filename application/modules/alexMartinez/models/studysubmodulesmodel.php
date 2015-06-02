@@ -8,7 +8,7 @@
 */
 
 class studysubmodulesmodel  extends CI_Model{
-		
+
 	function __construct()
 	{
         parent::__construct();
@@ -95,7 +95,7 @@ class studysubmodulesmodel  extends CI_Model{
     {
         if ($id && $data){
             $this->db->where('study_submodule_id',$id);
-            $this->db->update('study_submodule',$data);
+            $this->db->update('study_submodules',$data);
             return true;
         }else{
             return false;

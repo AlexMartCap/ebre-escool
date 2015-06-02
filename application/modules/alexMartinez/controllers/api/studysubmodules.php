@@ -124,7 +124,7 @@ class studysubmodules extends REST_Controller
         {
             //Si no hay identificador se manda el código de respuesta
             $message = array('id'=>'','message'=>'YOU MUST SEND AN ID');
-            $this->response(NULL, 400);
+            $this->response($message, 400);
         }
         log_message('debug',"delete id: ".$this->get('id'));
 
@@ -139,7 +139,7 @@ class studysubmodules extends REST_Controller
         {
             $message = array('id' => $this->get('id'), 'message' => 'ERROR DELETING!');
 
-            $this->response($message, 422); // 422 being the HTTP response code
+            $this->response($message, 404); // 404 being the HTTP response code
         } 
     }
 
@@ -174,12 +174,12 @@ class studysubmodules extends REST_Controller
         //Get the array we send from RestClient
         $data = array(
             'study_submodules_shortname'=>$this->put('shortname'),
-            'study_submodules_name'=>$this->put('shortname'),
-            'study_submodules_study_module_id'=>$this->put('shortname'),
+            'study_submodules_name'=>$this->put('name'),
+            'study_submodules_study_module_id'=>$this->put('study_module_id'),
             'study_submodules_courseid'=>$this->put('course_id'),
             'study_submodules_order'=>$this->put('order'),
             'study_submodules_description'=>$this->put('description'),
-            'study_submodules_creationUserid'=>$this->put('creator_id'),
+            'study_submodules_creationUserid'=>$this->put('creator_user_id'),
             'study_submodules_entryDate'=>$this->put('entry_date'),
             'study_submodules_lastupdateUserId'=>$this->put('last_update_user_id'),
             'study_submodules_markedForDeletion'=>$this->put('marked_for_deletion'),
@@ -211,8 +211,8 @@ class studysubmodules extends REST_Controller
             $today = date('Y-m-d H:i:s');
             $id = $this->put('id');
              $data = array(
-            'teacher_markedForDeletion'=>$this->put('marked_for_deletion'),
-            'teacher_markedForDeletionDate'=>$today);
+            'study_submodules_markedForDeletion'=>$this->put('marked_for_deletion'),
+            'study_submodules_markedForDeletionDate'=>$today);
            
              //CALL TO MODEL
              $response = $this->studysubmodules->updateStudySubmodule($id,$data);

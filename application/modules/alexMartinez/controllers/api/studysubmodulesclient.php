@@ -31,7 +31,7 @@ class studysubmodulesclient extends CI_Controller
 
 ########################################################################
 
- //Get one or all studysubmodules
+      //Get one or all studysubmodules
      function getStudySubmodule($id = null){
         
        
@@ -57,7 +57,7 @@ class studysubmodulesclient extends CI_Controller
             //EXAMPLE UPDATE WITHOUT FORM
              $id = 200;
              $column = 'name';
-             $officialId = 'Prova de modificar';
+             $name = 'Prova de modificar';
              $data = array(
                 'id'=>$id,
                  $column=>$name);
