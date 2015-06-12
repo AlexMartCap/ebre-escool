@@ -18,7 +18,10 @@ class studysubmodulesclient extends CI_Controller
     {
        parent::__construct();
         $this->load->library('Rest');
+        $this->load->config('rest_client');
         $config = array('server' =>'http://localhost/ebre-escool/index.php/');
+            'api_key' => $this->config->item('api_key'),
+            'api_name' => 'X-API-KEY');
         $this->rest->initialize($config);
     
         //We can add:
@@ -70,7 +73,7 @@ class studysubmodulesclient extends CI_Controller
 
     //Delete studysubmodule
     function deleteStudySubmodule($id = null){
-        $deleteStudySubmodule_Url = 'alexMartinez/api/studysubmodules/studysubmodule/';
+        $deleteStudySubmodule_Url = 'alexMartinez/api/studysubmodules/studysubmodule';
 
         if($id){
             
@@ -106,7 +109,7 @@ class studysubmodulesclient extends CI_Controller
 
       
         //Call the RestServer
-        $insertStudySubmodule_Url = 'alexMartinez/api/studysubmodules/studysubmodule/';
+        $insertStudySubmodule_Url = 'alexMartinez/api/studysubmodules/studysubmodule';
         $insertResponse = $this->rest->put($insertStudySubmodule_Url,$studysubmodule);
         echo json_encode($insertResponse); 
 

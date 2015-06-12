@@ -15,6 +15,7 @@ class studysubmodulesmodel  extends CI_Model{
         $this->load->database();
     }
 
+	//GET ALL STUDY SUBMODULES
     function getstudysubmodules(){
     	$this->db->select('study_submodules_id,study_submodules_shortname,
     	study_submodules_name,study_submodules_description');
@@ -23,9 +24,10 @@ class studysubmodulesmodel  extends CI_Model{
 		
 		$query = $this->db->get();
 		//echo $this->db->last_query(). "<br/>";
-		$study_submodules = array();
 
+		$study_submodules = array();
 		if($query->num_rows()>0){
+
 			foreach ($query->result() as $row ) {
 				$study_submodule = new stdClass;
 				// Adding rows to stdClass and changing their names.
@@ -91,18 +93,22 @@ class studysubmodulesmodel  extends CI_Model{
     }
 
 	//update study_submodules_id
-    function updateStudysubmodule($id,$data)
+    function updateStudySubmodule($id,$data)
     {
         if ($id && $data){
-            $this->db->where('study_submodule_id',$id);
+            $this->db->where('study_submodules_id',$id);
             $this->db->update('study_submodules',$data);
-            return true;
-        }else{
-            return false;
+
+            if($this->db->affected_rows()==1){
+            	return true;
+        	}else{
+            	return false;
+        	}
         }
+
     }
 
-	function insertStudysubmodule($data){
+	function insertStudySubmodule($data){
         
         if ($data){
           //Make the insert
@@ -128,3 +134,4 @@ class studysubmodulesmodel  extends CI_Model{
     }
 }
 
+?>

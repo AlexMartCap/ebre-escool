@@ -79,38 +79,24 @@ class studysubmodules extends REST_Controller
     function studysubmodule_post()
     {
         /*if(isset($_POST)){
-        $message = array('id' => $this->input->get_post('id'), 'date' => $this->input->get_post('studysubmodule_entryDate'));
+        $message = array('id' => $this->input->get_post('id'), 'date' => $this->input->get_post('teacher_entryDate'));
         $this->response($message, 200);
         }*/
         if (isset($_POST)){
             //GET DATA FROM POST
-            $postdata = file_get_contents("php://input");
-            //log_message('debug',$postdata);
-            $studySubmodulesObject = json_decode($postdata);
-
+             $id = $this->input->get_post('id');
              $data = array(
-            'study_submodules_shortname'=>$studySubmodulesObject->{'shortname'},
-            'study_submodules_name'=>$studySubmodulesObject->{'name'},
-            'study_submodules_study_module_id'=>$studySubmodulesObject->{'study_module_id'},
-            'study_submodules_courseid'=>$studySubmodulesObject->{'course_id'},
-            'study_submodules_order'=>$studySubmodulesObject->{'order'},
-            'study_submodules_description'=>$studySubmodulesObject->{'description'},
-            'study_submodules_creationUserid'=>$studySubmodulesObject->{'creator_user_id'},
-            'study_submodules_entryDate'=>$studySubmodulesObject->{'entry_date'},
-            'study_submodules_lastupdateUserId'=>$studySubmodulesObject->{'last_update_user_id'},
-            'study_submodules_markedForDeletion'=>$studySubmodulesObject->{'marked_for_deletion'},
-            'study_submodules_markedForDeletionDate'=>$studySubmodulesObject->{'marked_for_deletion_date'});
-                   
+             'study_submodules_name'=>$this->input->get_post('study_submodules_name'));
              //CALL TO MODEL
-        $response = $this->studysubmodules->insertStudy($data);
+             $response = $this->studysubmodulesmodel->updateStudySubmodule($id,$data);
         }
         //$message = array('id' => $this->get('id'), 'name' => $this->post('name'), 'email' => $this->post('email'), 'message' => 'ADDED!');
        
-        if($response['response']){
-          $message = array('id' => $response['id'], 'message' => 'NEW STUDY SUBMODULE INSERTED!');
+        if($response){
+          $message = array('id' => $id, 'message' => 'UPDATED!');
           $this->response($message, 200); // 200 being the HTTP response code
         }else{
-            $message = array('id' =>$response['id'], 'message' => 'ERROR INSERTING!');
+            $message = array('id' =>$id, 'message' => 'ERROR UPDATING!');
             $this->response($message, 404); // 404 being the HTTP response code(Not Found)
         }
     }
@@ -170,32 +156,32 @@ class studysubmodules extends REST_Controller
     //UPDATE studysubmodules
     function studysubmodule_put(){
         //GET THE ID
-         $id = $this->put('id');
+         //$id = $this->put('id');
         //Get the array we send from RestClient
         $data = array(
-            'study_submodules_shortname'=>$this->put('shortname'),
-            'study_submodules_name'=>$this->put('name'),
-            'study_submodules_study_module_id'=>$this->put('study_module_id'),
-            'study_submodules_courseid'=>$this->put('course_id'),
-            'study_submodules_order'=>$this->put('order'),
-            'study_submodules_description'=>$this->put('description'),
-            'study_submodules_creationUserid'=>$this->put('creator_user_id'),
-            'study_submodules_entryDate'=>$this->put('entry_date'),
-            'study_submodules_lastupdateUserId'=>$this->put('last_update_user_id'),
-            'study_submodules_markedForDeletion'=>$this->put('marked_for_deletion'),
-            'study_submodules_markedForDeletionDate'=>$this->put('marked_for_deletion_date'));  
+            'study_submodules_shortname'=>$this->put('study_submodules_shortname'),
+            'study_submodules_name'=>$this->put('study_submodules_name'),
+            'study_submodules_study_module_id'=>$this->put('study_submodules_study_module_id'),
+            'study_submodules_courseid'=>$this->put('study_submodules_courseid'),
+            'study_submodules_order'=>$this->put('study_submodules_order'),
+            'study_submodules_description'=>$this->put('study_submodules_description'),
+            'study_submodules_creationUserid'=>$this->put('study_submodules_creationUserid'),
+            'study_submodules_entryDate'=>$this->put('study_submodules_entryDate'),
+            'study_submodules_lastupdateUserId'=>$this->put('study_submodules_lastupdateUserId'),
+            'study_submodules_markedForDeletion'=>$this->put('study_submodules_markedForDeletion'),
+            'study_submodules_markedForDeletionDate'=>$this->put('study_submodules_markedForDeletionDate'));  
             
          //Call inset method in model
-         $updateResponse = $this->studysubmodules->updateStudySubmodule($id,$data);
+         $insertResponse = $this->studysubmodulesmodel->insertStudySubmodule($data);
          //echo $insertResponse['response']." ".$insertResponse['id'];
          
          //Response
-         if($updateResponse){
-            $message = array('id' => $id,'message' => 'UPDATED!');
+         if($insertResponse['response']){
+            $message = array('id' => $insertResponse['id'],'message' => 'NEW STUDY SUBMODULE INSERTED');
             $this->response($message,200);//200 being the HTTP response code
 
          }else{
-            $message = array('id' => $id, 'message' => 'ERROR UPDATING!');
+            $message = array('id' => $insertResponse['id'], 'message' => 'ERROR INSERTING');
             $this->response($message, 422); // 422 being the HTTP response code
          }
 
